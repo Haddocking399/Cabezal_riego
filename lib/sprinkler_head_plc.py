@@ -1,91 +1,93 @@
 from abc import abstractmethod
 from abc import ABCMeta
 
+
 class SprinklerHeadPLC(metaclass=ABCMeta):
 
-  @abstractmethod
-  def connect(self, address: str, rack: int, slot: int, tcpport: int = 102) -> bool:
-    pass
+    @abstractmethod
+    def connect(self, address: str, rack: int, slot: int, port: int = 102) -> bool:
+        pass
 
-  @abstractmethod
-  def disconnect(self) -> bool:
-    pass
+    @abstractmethod
+    def disconnect(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_connected(self) -> bool:
-    pass
+    @abstractmethod
+    def is_connected(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_filter_clogged(self) -> bool:
-    pass
+    @abstractmethod
+    def is_filter_clogged(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_working_ph(self) -> bool:
-    pass
+    @abstractmethod
+    def is_working_ph(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_working_water_level(self) -> bool:
-    pass
+    @abstractmethod
+    def is_working_water_level(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_working_salinity(self) -> bool:
-    pass
+    @abstractmethod
+    def is_working_salinity(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_working_pressure(self) -> bool:
-    pass
+    @abstractmethod
+    def is_working_pressure(self) -> bool:
+        pass
 
-  @abstractmethod
-  def is_working_flow(self) -> bool:
-    pass
+    @abstractmethod
+    def is_working_flow(self) -> bool:
+        pass
 
-  @abstractmethod
-  def get_ph(self) -> float:
-    pass
+    @abstractmethod
+    def get_ph(self) -> float:
+        pass
 
-  @abstractmethod
-  def get_water_level(self) -> float:
-    pass
+    @abstractmethod
+    def get_water_level(self) -> float:
+        pass
 
-  @abstractmethod
-  def get_salinity(self) -> float:
-    pass
+    @abstractmethod
+    def get_salinity(self) -> float:
+        pass
 
-  @abstractmethod
-  def get_pressure(self) -> float:
-    pass
+    @abstractmethod
+    def get_pressure(self) -> float:
+        pass
 
-  @abstractmethod
-  def get_flow(self) -> float:
-    pass
+    @abstractmethod
+    def get_flow(self) -> float:
+        pass
 
-  @abstractmethod
-  def get_fertilizer_state(self, index: int) -> bool:
-    pass
+    @abstractmethod
+    def get_fertilizer_state(self, index: int) -> bool:
+        pass
 
-  @abstractmethod
-  def get_fertilizer_running_milliseconds(self, index: int) -> int:
-    pass
+    @abstractmethod
+    def get_fertilizer_running_milliseconds(self, index: int) -> int:
+        pass
 
-  @abstractmethod
-  def get_breaker_state(self, index: int) -> bool:
-    pass
+    @abstractmethod
+    def get_breaker_state(self, index: int) -> bool:
+        pass
 
-  @abstractmethod
-  def get_breaker_off_count(self, index: int) -> int:
-    pass
+    @abstractmethod
+    def get_breaker_off_count(self, index: int) -> int:
+        pass
 
-  @abstractmethod
-  def get_pump_state(self) -> bool:
-    pass
+    @abstractmethod
+    def get_pump_state(self) -> bool:
+        pass
 
-  @abstractmethod
-  def get_valve_state(self, index: int) -> bool:
-    pass
+    @abstractmethod
+    def get_valve_state(self, index: int) -> bool:
+        pass
 
-  @abstractmethod
-  def set_valve_state(self, index: int, state: bool):
-    pass
+    @abstractmethod
+    def set_valve_state(self, index: int, state: bool):
+        pass
+
 
 """
 PH_BD | 0.0
