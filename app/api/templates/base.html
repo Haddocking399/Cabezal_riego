@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <link rel="icon" type="image/png" href="{% static 'icon.png' %}"/>
+</head>
+<body>
+
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a {% if current == "home" %} class="nav-link active waves-light" {% else %} class="nav-link waves-light" {% endif %} href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a {% if current == "sensors" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/sensors">Sensores</a>
+    </li>
+    <li class="nav-item">
+      <a {% if current == "pump" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/pump">Bomba</a>
+      </li>    
+    <li class="nav-item">
+      <a {% if current == "fertilizers" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/fertilizers">Fertilizantes</a>
+      </li>
+      <li class="nav-item">
+        <a {% if current == "breakers" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/breakers">Disyuntores</a>
+      </li>
+      <li class="nav-item">
+        <a {% if current == "valves" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="/valves">Válvulas</a>
+      </li>                
+  </ul>
+
+  {% block content %}
+  {% endblock %}  
+
+</div>
+</body>
+</html>

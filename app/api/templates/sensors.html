@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+<tr>
+    <tr class="table-success"><td>PH</td><td>{{ ph }}</td></tr>
+    <tr class="table-primary"><td>Nivel del agua</td><td>{{ water_level }}</td></tr>
+    <tr class="table-danger"><td>Presión</td><td>{{ pressure }}</td></tr>
+    <tr class="table-secondary"><td>Caudal</td><td>{{ flow }}</td></tr>
+    <tr class="table-warning"><td>Salinidad</td><td>{{ salinity }}</td></tr>    
+  </tr>
+</table>
+
+<div>
+    <canvas id="sensors"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('sensors');
+
+    const labels = [];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'PH',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(180, 231, 221)',
+                tension: 0.1
+            },
+            {
+                label: 'Nivel del agua',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(180, 226, 255)',
+                tension: 0.1
+            },   
+            {
+                label: 'Presión',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(255, 200, 200)',
+                tension: 0.1
+            }, 
+            {
+                label: 'Salinidad',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(255, 240, 180)',
+                tension: 0.1
+            }, 
+            {
+                label: 'Caudal',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(200, 200, 200)',
+                tension: 0.1
+            },                                              
+        ]
+    };
+
+    {% for x in data %}
+        labels.push('{{ x.date }}')
+        data.datasets[0].data.push({{ x.ph }})
+        data.datasets[1].data.push({{ x.water_level }})
+        data.datasets[2].data.push({{ x.pressure }})
+        data.datasets[3].data.push({{ x.flow }})
+        data.datasets[4].data.push({{ x.salinity }})
+    {% endfor %}    
+
+    const config = {
+        type: 'line',
+        data: data,
+    };    
+
+    new Chart(ctx, config);
+</script>
+{% endblock %}

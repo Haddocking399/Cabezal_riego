@@ -1,7 +1,6 @@
 import snap7
 from snap7.util import *
-from lib.sprinkler_head_plc import SprinklerHeadPLC
-
+from api.sprinkler_head_plc import SprinklerHeadPLC
 
 class Snap7SprinklerHead(SprinklerHeadPLC):
 

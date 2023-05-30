@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="container text-center mt-2">
+{% if state %}
+    <h2>🟢 Encendida</h2>
+{% else %}
+    <h2>🔴 Apagada</h2>
+{% endif %}
+</div>
+
+<div>
+    <canvas id="pump"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('pump');
+
+    const labels = [];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Bomba',
+                data: ['ON', 'ON', 'OFF', 'ON', 'OFF', 'OFF', 'ON'],
+                borderColor: 'rgb(50, 100, 200)',
+                backgroundColor: 'rgb(50, 100, 200)',
+                stepped: true,
+                yAxisID: 'y2',
+            }
+        ]
+    };
+    {% for x in data %}
+        labels.push('{{ x.date }}')
+        {% if x.state %}
+            data.datasets[0].data.push('ON')
+        {% else %}
+            data.datasets[0].data.push('OFF')
+        {% endif %}
+    {% endfor %}        
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            scales: {
+                y2: {
+                    type: 'category',
+                    labels: ['ON', 'OFF'],
+                    offset: true,
+                    position: 'left',
+                    stack: 'demo',
+                    stackWeight: 1,
+                    border: {
+                        color: 'rgb(180, 226, 255)'
+                    }
+                }
+            }
+        },
+    };    
+    new Chart(ctx, config);
+</script>
+{% endblock %}

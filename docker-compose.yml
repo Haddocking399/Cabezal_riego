@@ -1,0 +1,40 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    command: --init-file /data/application/init.sql    
+    volumes:
+        - ./init.sql:/data/application/init.sql    
+    environment:
+      MARIADB_ROOT_PASSWORD: P455w0rd
+
+  web: 
+    build:
+      context: app
+      target: builder
+    ports: 
+      - '8000:8000'    
+    environment:
+      DB_NAME: sprinkler_head
+      DB_USER: sprinkler_user
+      DB_PASSWORD: P455w0rd
+      DEBUG: false #Poner a false si se prueba con PLC
+      PLC_IP: 192.168.2.100
+      PLC_RACK: 0
+      PLC_SLOT: 1
+      PLC_UPDATE_TIME: 1
+    depends_on:
+      - db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      ADMINER_DESIGN: pepa-linha-dark
+

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="container text-left mt-3 mb-3">
+    {% if state %}
+    <h3><strong style="color: darkslategrey;">Bomba:</strong> 🟢 Encendida</h3>
+    {% else %}
+    <h3><strong style="color: darkslategrey;">Bomba:</strong> 🔴 Apagada</h3>
+    {% endif %}
+</div>
+
+<table class="table table-striped">
+    <tr class="table-success"><td>PH</td><td>{{ ph }}</td></tr>
+    <tr class="table-primary"><td>Nivel del agua</td><td>{{ water_level }}</td></tr>
+    <tr class="table-danger"><td>Presión</td><td>{{ pressure }}</td></tr>
+    <tr class="table-secondary"><td>Caudal</td><td>{{ flow }}</td></tr>
+    <tr class="table-warning"><td>Salinidad</td><td>{{ salinity }}</td></tr>    
+</table>
+
+<table class="table table-dark table-striped caption-top">
+    <caption>Disyuntores</caption>
+    {% for x in breakers %}
+        <tr>        
+            <th scope="row">{{ forloop.counter }}</th>
+            {% if x.state %}
+                <td>🟢 Encendido</td>
+            {% else %}
+                <td>🔴 Apagado</td>
+            {% endif %}        
+      </tr>
+    {% endfor %}        
+</table>
+
+<table class="table table-dark table-striped caption-top">
+    <caption>Fertilizantes</caption>
+    {% for x in fertilizers %}
+        <tr>        
+            <th scope="row">{{ forloop.counter }}</th>
+            {% if x.state %}
+                <td>🟢 Encendido</td>
+            {% else %}
+                <td>🔴 Apagado</td>
+            {% endif %}        
+      </tr>
+    {% endfor %}        
+</table>
+
+<table class="table table-dark table-striped caption-top">
+    <caption>Válvulas</caption>
+    {% for x in valves %}
+        <tr>        
+            <th scope="row">{{ forloop.counter }}</th>
+            {% if x.state %}
+                <td>🟢 Encendida</td>
+            {% else %}
+                <td>🔴 Apagada</td>
+            {% endif %}        
+      </tr>
+    {% endfor %}        
+</table>
+
+{% endblock %}
